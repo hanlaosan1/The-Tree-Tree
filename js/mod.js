@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The ??? Tree",
-	author: "nobody",
-	pointsName: "points",
+	name: "The Tree Tree",
+	author: "韩老三",
+	pointsName: "树种",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
@@ -12,8 +12,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "护林员的故事",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -21,7 +21,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Added things.<br>
 		- Added stuff.`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `这款游戏太墙了，作者用了11m测试！作者还想做剧情，主角是护林员！还想搞一波伟大的理想，作者太不要脸了！`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -33,15 +33,16 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return true
+	return hasUpgrade('s',11);
 }
 
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
 	let gain = new Decimal(1)
+	if(hasUpgrade('s',12)) gain=gain.times(10);
+	if (hasUpgrade('s', 13)) gain = gain.times(upgradeEffect('s', 13))
 	return gain
 }
 
@@ -55,7 +56,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return hasUpgrade('s',21)
 }
 
 
