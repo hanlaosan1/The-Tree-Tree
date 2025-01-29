@@ -33,12 +33,14 @@ addLayer("s", {
             name:"su1",
             description:"开始生产树种",
             cost:new Decimal(1),
+            unlocked(){return player[this.layer].points.gte(1) || hasUpgrade('s',11)}
         },
         12:{
             title:"树种太少了",
             name:"su2",
             description:"树种获取速度*10",
             cost:new Decimal(5),
+            unlocked(){return hasUpgrade('s',11)}
         },
         13:{
             title:"树苗越多，林子越大",
@@ -48,12 +50,14 @@ addLayer("s", {
                 return player[this.layer].points.add(1).pow(0.4);
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            unlocked(){return hasUpgrade('s',12)},
             cost:new Decimal(20),
         },
         14:{
             title:"高质量树种",
             name:"su4",
             description:"树苗获取*5",
+            unlocked(){return hasUpgrade('s',13)},
             cost:new Decimal(100),
         },
         15:{
@@ -65,18 +69,22 @@ addLayer("s", {
                 return player[this.layer].points.add(2).pow(0.3);
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            unlocked(){return hasUpgrade('s',14)}
         },
         16:{
             title:"自动化种树",
             name:"su6",
             description:"每秒获得重置可获得的树苗数量的%10",
             cost:new Decimal(400),
+            unlocked(){return hasUpgrade('s',15)},
         },
         21:{
             title:"v0.1终局",
             name:"su???",
             cost:new Decimal(1000),
+            unlocked(){return hasUpgrade('s',16)},
         }
     },
     layerShown(){return true}
 })
+
