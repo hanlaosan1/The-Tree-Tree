@@ -13,8 +13,7 @@ function getStartOptions() {
 		showStory: true,
 		forceOneTab: false,
 		oldStyle: false,
-		forceTooltips: true,
-		hideMilestonePopups: false,
+		tooltipForcing: true,
 	}
 }
 
@@ -77,5 +76,3 @@ function milestoneShown(layer, id) {
 	}
 	return false;
 }
-
-let formatOption = (opt) => opt ? 'ON' : 'OFF'

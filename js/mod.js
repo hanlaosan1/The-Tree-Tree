@@ -12,8 +12,8 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.1",
-	name: "护林员的故事",
+	num: "0.2",
+	name: "种树原来要浇水啊！",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
@@ -21,7 +21,7 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Added things.<br>
 		- Added stuff.`
 
-let winText = `这款游戏太墙了，作者用了11m测试！作者还想做剧情，主角是护林员！还想搞一波伟大的理想，作者太不要脸了！`
+let winText = `史！记得推荐给别人玩。`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -43,6 +43,7 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if(hasUpgrade('s',12)) gain=gain.times(10);
 	if (hasUpgrade('s', 13)) gain = gain.times(upgradeEffect('s', 13))
+	if(hasMilestone('w',1)) gain = gain.times(player.w.points)
 	return gain
 }
 
@@ -56,7 +57,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return hasUpgrade('s',21)
+	return hasMilestone('w',4)
 }
 
 

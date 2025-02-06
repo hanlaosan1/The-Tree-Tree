@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-
+<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/system-style.css" />
 	<link rel="stylesheet" type="text/css" href="css/bars.css" />
 	<link rel="stylesheet" type="text/css" href="css/components.css" />
@@ -13,7 +13,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
 
-	<script src="https://unpkg.com/vue@2.7.16/dist/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 	<script src="js/technical/break_eternity.js"></script>
 	<script src="js/technical/layerSupport.js"></script>
 
@@ -32,6 +32,7 @@
 	<script src="js/technical/particleSystem.js"></script>
 	<script src="js/utils/NumberFormating.js"></script>
 	<script src="js/utils/options.js"></script>
+	<script src="js/pako.js"></script>
 	<script src="js/utils/save.js"></script>
 	<script src="js/utils/themes.js"></script>
 
@@ -51,7 +52,7 @@
 			<h2>{{modInfo.name}} {{VERSION.withoutName}}</h2><br><br>
 			<h3 v-html="modInfo.winText"></h3><br>
 			<h3>Please check the Discord to see if there are new content updates!</h3><br><br>
-			<div v-if="!player.timePlayedReset">It took you {{formatTime(player.timePlayed)}} to beat the game.</div>
+			<div v-if="!player.timePlayedReset">It took you {{formatTime(player.realTime)}} to beat the game.</div>
 			<br>
 			<button class="longUpg can" onclick="hardReset(true)">Play Again</button>&nbsp;&nbsp;&nbsp;&nbsp;<button
 				class="longUpg can" onclick="keepGoing()">Keep Going</button>
