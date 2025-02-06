@@ -24,7 +24,7 @@ addLayer("s", {
     passiveGeneration()
     {
         if(hasUpgrade('s',21)) return 0.5
-        if(hasMilestone('w',2)) return 0.1
+        if(hasMilestone('w',1)) return 0.1
         return 0;
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -128,12 +128,12 @@ addLayer("w",{
     milestones: {
         1: {
             requirementDescription: "拥有1水",
-            effectDescription: "将树种获取数乘以水的数量",
+            effectDescription: "每秒获得重置可获得的树苗数量的%10",
             done() { return player.w.points.gte(1) }
         },
         2:{
             requirementDescription: "拥有2水",
-            effectDescription: "每秒获得重置可获得的树苗数量的%10",
+            effectDescription: "将树种获取数乘以水的数量",
             done() { return player.w.points.gte(2) }
         },
         3:{

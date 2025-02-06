@@ -12,7 +12,7 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
+	num: "0.21",
 	name: "种树原来要浇水啊！",
 }
 
@@ -43,7 +43,7 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if(hasUpgrade('s',12)) gain=gain.times(10);
 	if (hasUpgrade('s', 13)) gain = gain.times(upgradeEffect('s', 13))
-	if(hasMilestone('w',1)) gain = gain.times(player.w.points)
+	if(hasMilestone('w',2)) gain = gain.times(player.w.points)
 	return gain
 }
 
