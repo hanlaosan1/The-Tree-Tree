@@ -88,7 +88,7 @@ addLayer("s", {
             name:"su8",
             description:"加强水里程碑2<br>10% -> 50%",
             cost:1e4,
-            unlocked(){return hasMilestone('w',2)}
+            unlocked(){return hasMilestone('w',3)}
         },
         22:{
             title:"太多了！",
@@ -105,7 +105,7 @@ addLayer("w",{
     symbol:"水",
     color:"#00FBFF",
     startData() { return {
-        unlocked(){return hasUpgrade('s',17)},
+        unlocked(){return hasUpgrade('s',16)},
 		points: new Decimal(0),
     }},
     branches:["s"],
