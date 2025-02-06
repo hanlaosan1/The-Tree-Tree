@@ -124,7 +124,7 @@ addLayer("w",{
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
     position:0,
-    layerShown(){return hasUpgrade('s',16)},
+    layerShown(){return hasUpgrade('s',16)||player.w.unlocked()},
     milestones: {
         1: {
             requirementDescription: "拥有1水",
