@@ -4,7 +4,7 @@ addLayer("s", {
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
     startData() { return {
         unlocked: true,
-		points: new Decimal(0),
+		sapling: new Decimal(0),
     }},
     color: "#4BDC13",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
@@ -12,28 +12,29 @@ addLayer("s", {
     baseResource: "树种", // Name of resource prestige is based on
     baseAmount() {return player.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.6, 
+    exponent: 0.5, 
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if(hasUpgrade('s',14)) mult=mult.times(5)
         if(hasUpgrade('s',15)) mult=upgradeEffect('s',15)
-        if(hasUpgrade('s',16)) player[this.layer].points=player[this.layer].points.add(mult.times(0.1))
         return mult
+    },
+    passiveGeneration()
+    {
+        if(hasUpgrade('s',16)) return 0.1
+        return 0;
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
-        {key: "p", description: "P: Reset for prestige points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
     upgrades: {
         11:{
             title:"成为护林员",
             name:"su1",
             description:"开始生产树种",
             cost:new Decimal(1),
-            unlocked(){return player[this.layer].points.gte(1) || hasUpgrade('s',11)}
+            unlocked(){return (player.sapling.gte(1) || hasUpgrade('s',11))}
         },
         12:{
             title:"树种太少了",
@@ -47,7 +48,7 @@ addLayer("s", {
             name:"su3",
             description:"基于树苗数量加成树种获取数量",
             effect() {
-                return player[this.layer].points.add(1).pow(0.4);
+                return player.sapling.add(1).pow(0.4);
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             unlocked(){return hasUpgrade('s',12)},
@@ -66,7 +67,7 @@ addLayer("s", {
             description:"树苗加成本身获取",
             cost:new Decimal(150),
             effect() {
-                return player[this.layer].points.add(2).pow(0.3);
+                return player.sapling.add(2).pow(0.3);
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             unlocked(){return hasUpgrade('s',14)}
@@ -78,13 +79,12 @@ addLayer("s", {
             cost:new Decimal(400),
             unlocked(){return hasUpgrade('s',15)},
         },
-        21:{
-            title:"v0.1终局",
-            name:"su???",
+        17:{
+            title:"解锁下一层级‘水’",
+            name:"su7",
             cost:new Decimal(1000),
             unlocked(){return hasUpgrade('s',16)},
         }
     },
     layerShown(){return true}
 })
-
